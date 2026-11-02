@@ -12,10 +12,12 @@ const [formData, setFormData] = useState({
     confirmPassword: "",
 });
 
+    const {signup,user}=useUserStore()
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(formData);
-    }
+        signup(formData);
+    };
 
     return (
     <div className= 'flex flex-col justify-center py-12 sm:px-6 lg:px-8'>
