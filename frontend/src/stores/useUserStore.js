@@ -29,10 +29,28 @@ export const useUserStore = create((set, get) => ({
 
         try {
             const res = await axios.post("/auth/login", { email, password });
-            set({ user: res.data.user, loading: false });
+            console.log("User is Here", res.data);
+            set({ user: res.data, loading: false });
         } catch (error) {
             set({ loading: false });
             toast.error(error.response.data.message || "Error Occurred.");
         }
-    }
+    },
+    logout: async () => {
+        try {
+            await axios.post("/auth/logout");
+            set({ user: null });
+        } catch (error) {
+            toast.error(error.response?.data?.message || "Error Occurred.");
+        }
+    },
+    checkAuth: async () => {
+        set({ checkingAuth: true });
+        try {
+            const response = await axios.get("/auth/profile");
+            set({ user: response.data.user, checkingAuth: false });
+        } catch (error) {
+            set({ checkingAuth: false, user: null });
+        }
+    },
 }));
