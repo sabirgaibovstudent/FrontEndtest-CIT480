@@ -1,6 +1,8 @@
 import { Route, Routes, Navigate } from "react-router-dom";
 import { useUserStore } from "./stores/useUserStore";
+import AdminPage from "./pages/AdminPage";
 import { useEffect } from "react";
+
 import HomePage from "./pages/HomePage";
 import SignUpPage from "./pages/SignUpPage";
 import LoginPage from "./pages/LoginPage";
@@ -31,9 +33,10 @@ function App() {
       
     <Navbar />
     <Routes>
-      <Route path='/' element={< HomePage />} />
+      <Route path='/' element={<HomePage />} />
       <Route path='/signup' element={!user ? <SignUpPage /> : <Navigate to='/' />} />
       <Route path='/login' element={!user ? <LoginPage /> : <Navigate to='/' />} />
+      <Route path='/secret-dashboard' element={user?.role === 'admin' ? <AdminPage /> : <Navigate to='/login' />} />
     </Routes>
     </div>
     <Toaster />
