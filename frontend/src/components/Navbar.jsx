@@ -4,7 +4,10 @@ import { useUserStore } from "../stores/useUserStore";
 
 const Navbar = () => {
     const {user, logout} = useUserStore();
-    const isAdmin = user?.role === 'admin';
+    // remove adminpreview/canAccessAdmin and return to isAdmin
+    // const isAdmin = user?.role === "admin"; 
+    const adminPreview = true;
+    const canAccessAdmin = adminPreview || user?.role === "admin";
 
   return (
     <header className='fixed top-0 left-0 w-full bg-gray-900 bg-opacity-90 backdrop-blur-md shadow-lg z-40
@@ -26,7 +29,7 @@ const Navbar = () => {
             
                     )}
             
-                    {isAdmin && (
+                    {canAccessAdmin && (
                     <Link className='bg-emerald-700 hover:bg-emerald-600 text-white px-3 py-1 rounded-md font-medium
                         transition duration-300 ease-in-out flex items-center'
                         to={'/secret-dashboard'}

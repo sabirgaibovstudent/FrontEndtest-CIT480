@@ -13,6 +13,8 @@ import LoadingSpinner from "./components/LoadingSpinner";
 
 function App() {
   const {user, checkAuth, checkingAuth} = useUserStore();
+  const adminPreview = true;
+  const canAccessAdmin = adminPreview || user?.role === "admin";
 
   useEffect(() => {
     checkAuth();
@@ -36,8 +38,10 @@ function App() {
       <Route path='/' element={<HomePage />} />
       <Route path='/signup' element={!user ? <SignUpPage /> : <Navigate to='/' />} />
       <Route path='/login' element={!user ? <LoginPage /> : <Navigate to='/' />} />
-      <Route path='/secret-dashboard' element={user?.role === 'admin' ? <AdminPage /> : <Navigate to='/login' />} />
+      <Route path='/secret-dashboard' element={canAccessAdmin ? <AdminPage /> : <Navigate to='/login' />} />
     </Routes>
+    // add this back to secret-dashboard route after testing 
+    // user?.role === "admin"
     </div>
     <Toaster />
   </div>

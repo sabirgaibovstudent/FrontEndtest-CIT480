@@ -1,8 +1,8 @@
 import { ShoppingBasket, PlusCircle, BarChart } from "lucide-react";
 import { useState } from "react";
-import CreateProductForm from "../components/Admin/CreateProductForm";
-import ProductsList from "../components/Admin/ProductsList";
-import AnalyticsTab from "../components/Admin/AnalyticsTab";
+import CreateProductForm from "../components/CreateProductForm";
+import ProductsList from "../components/ProductsList";
+import AnalyticsTab from "../components/AnalyticsTab";
 import { motion } from "framer-motion";
 
 const tabs = [
