@@ -1,11 +1,12 @@
 import { Route, Routes, Navigate } from "react-router-dom";
 import { useUserStore } from "./stores/useUserStore";
-import AdminPage from "./pages/AdminPage";
 import { useEffect } from "react";
 
 import HomePage from "./pages/HomePage";
 import SignUpPage from "./pages/SignUpPage";
 import LoginPage from "./pages/LoginPage";
+import CategoryPage from "./pages/CategoryPage";
+import AdminPage from "./pages/AdminPage";
 
 import Navbar from "./components/Navbar";
 import { Toaster } from "react-hot-toast";
@@ -39,6 +40,7 @@ function App() {
       <Route path='/signup' element={!user ? <SignUpPage /> : <Navigate to='/' />} />
       <Route path='/login' element={!user ? <LoginPage /> : <Navigate to='/' />} />
       <Route path='/secret-dashboard' element={canAccessAdmin ? <AdminPage /> : <Navigate to='/login' />} />
+      <Route path='/category/:category' element={ <CategoryPage/>} />
     </Routes>
     // add this back to secret-dashboard route after testing 
     // user?.role === "admin"
