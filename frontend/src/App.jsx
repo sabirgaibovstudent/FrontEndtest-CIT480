@@ -14,12 +14,18 @@ import LoadingSpinner from "./components/LoadingSpinner";
 
 function App() {
   const {user, checkAuth, checkingAuth} = useUserStore();
+  const {getCartItems} = useCartStore();
+  
   const adminPreview = true;
   const canAccessAdmin = adminPreview || user?.role === "admin";
 
   useEffect(() => {
     checkAuth();
   }, [checkAuth]);
+
+  useEffect(() => {
+    getCartItems();
+  }, [getCartItems]);
 
   if (checkingAuth) return <LoadingSpinner />;
 
@@ -41,6 +47,7 @@ function App() {
       <Route path='/login' element={!user ? <LoginPage /> : <Navigate to='/' />} />
       <Route path='/secret-dashboard' element={canAccessAdmin ? <AdminPage /> : <Navigate to='/login' />} />
       <Route path='/category/:category' element={ <CategoryPage/>} />
+      <Route path='/cart' element={user ? <CartPage /> : <Navigate to='/login' />} />
     </Routes>
     // add this back to secret-dashboard route after testing 
     // user?.role === "admin"
