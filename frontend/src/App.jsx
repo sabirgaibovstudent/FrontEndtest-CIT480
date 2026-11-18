@@ -9,6 +9,9 @@ import CategoryPage from "./pages/CategoryPage";
 import AdminPage from "./pages/AdminPage";
 import { useCartStore } from "./stores/useCartStore";
 import CartPage from "./pages/CartPage";
+import PurchaseSuccessPage from "./pages/PurchaseSuccessPage";
+import PurchaseCancelPage from "./pages/PurchaseCancelPage";
+
 
 import Navbar from "./components/Navbar";
 import { Toaster } from "react-hot-toast";
@@ -51,7 +54,11 @@ function App() {
       <Route path='/secret-dashboard' element={canAccessAdmin ? <AdminPage /> : <Navigate to='/login' />} />
       <Route path='/category/:category' element={ <CategoryPage/>} />
       <Route path='/cart' element={user ? <CartPage /> : <Navigate to='/login' />} />
-    </Routes>
+      <Route path='/purchase-success' element={user ? <PurchaseSuccessPage /> : <Navigate to='/login' />} />
+      <Route path='/purchase-cancel' element={user ? <PurchaseCancelPage /> : <Navigate to='/login' />} />
+
+
+   </Routes>
     // add this back to secret-dashboard route after testing 
     // user?.role === "admin"
     </div>
