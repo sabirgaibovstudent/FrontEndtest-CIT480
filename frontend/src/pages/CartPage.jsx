@@ -1,4 +1,4 @@
-import { useCartStore } from "../store/cartStore";
+import { useCartStore } from "../stores/useCartStore";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import CartItem from "../components/CartItem";
