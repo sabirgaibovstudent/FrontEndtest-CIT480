@@ -6,9 +6,9 @@ import { useCartStore } from "../stores/useCartStore";
 const Navbar = () => {
     const {user, logout} = useUserStore();
     // remove adminpreview/canAccessAdmin and return to isAdmin
-    // const isAdmin = user?.role === "admin"; 
-    const adminPreview = true;
-    const canAccessAdmin = adminPreview || user?.role === "admin";
+    const isAdmin = user?.role === "admin"; 
+    // const adminPreview = true;
+    // const canAccessAdmin = adminPreview || user?.role === "admin";
     const {cart} = useCartStore();
 
   return (
@@ -34,8 +34,8 @@ const Navbar = () => {
                     </Link>
             
                     )}
-                    // replace below
-                    {canAccessAdmin && (
+                    
+                    {user?.role === "admin" && (
                     <Link className='bg-emerald-700 hover:bg-emerald-600 text-white px-3 py-1 rounded-md font-medium
                         transition duration-300 ease-in-out flex items-center'
                         to={'/secret-dashboard'}

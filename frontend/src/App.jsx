@@ -21,8 +21,8 @@ function App() {
   const {user, checkAuth, checkingAuth} = useUserStore();
   const {getCartItems} = useCartStore();
   
-  const adminPreview = true;
-  const canAccessAdmin = adminPreview || user?.role === "admin";
+  // const adminPreview = true;
+  // const canAccessAdmin = adminPreview || user?.role === "admin";
 
   useEffect(() => {
     checkAuth();
@@ -51,16 +51,12 @@ function App() {
       <Route path='/' element={<HomePage />} />
       <Route path='/signup' element={!user ? <SignUpPage /> : <Navigate to='/' />} />
       <Route path='/login' element={!user ? <LoginPage /> : <Navigate to='/' />} />
-      <Route path='/secret-dashboard' element={canAccessAdmin ? <AdminPage /> : <Navigate to='/login' />} />
+      <Route path='/secret-dashboard' element={user?.role === "admin" ? <AdminPage /> : <Navigate to='/login' />} />
       <Route path='/category/:category' element={ <CategoryPage/>} />
       <Route path='/cart' element={user ? <CartPage /> : <Navigate to='/login' />} />
       <Route path='/purchase-success' element={user ? <PurchaseSuccessPage /> : <Navigate to='/login' />} />
       <Route path='/purchase-cancel' element={user ? <PurchaseCancelPage /> : <Navigate to='/login' />} />
-
-
    </Routes>
-    // add this back to secret-dashboard route after testing 
-    // user?.role === "admin"
     </div>
     <Toaster />
   </div>
